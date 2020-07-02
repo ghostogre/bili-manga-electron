@@ -5,6 +5,22 @@
   <body>
     <div
       style="text-align: center"
-    >Hello world</div>
+    >
+      <button id='openDevtoolBtn'>打开调试工具</button>
+      <button id='createNewWindow'>开启新的窗口</button>
+    </div>
+    <script>
+      let { remote } = require('electron');
+      document.querySelector('#openDevtoolBtn').addEventListener('click', function () {
+        remote.getCurrentWindow().webContents.openDevTools()
+      })
+      let win = null
+      document.querySelector('#createNewWindow').addEventListener('click', function () {
+        win = new remote.BrowserWindow({
+          webPreferences: { nodeIntegration: true }
+        })
+        win.loadFile('index.html')
+      })
+    </script>
   </body>
 </html>
