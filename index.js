@@ -7,6 +7,7 @@ var win = null
 
 app.on('ready', function () {
   win = new BrowserWindow({
+    // 集成node环境
     webPreferences: { nodeIntegration: true }
   })
   win.loadFile('index.html')
