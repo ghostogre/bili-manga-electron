@@ -8,9 +8,10 @@
     >
       <button id='openDevtoolBtn'>打开调试工具</button>
       <button id='createNewWindow'>开启新的窗口</button>
+      <button id="sendMessageBtn">发送进程消息</button>
     </div>
     <script>
-      let { remote } = require('electron');
+      let { remote, ipcRenderer } = require('electron');
       document.querySelector('#openDevtoolBtn').addEventListener('click', function () {
         remote.getCurrentWindow().webContents.openDevTools()
       })
@@ -20,6 +21,9 @@
           webPreferences: { nodeIntegration: true }
         })
         win.loadFile('index.html')
+      })
+      document.querySelector('#sendMessageBtn').addEventListener('click', function () {
+        ipcRenderer.send('message', 'test message')
       })
     </script>
   </body>
